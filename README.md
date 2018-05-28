@@ -1,2 +1,2 @@
 # Criminal Intent
-The CriminalIntent App from the Android Big Nerd Ranch Book
+The Criminal Intent App from the Android Big Nerd Ranch Book
