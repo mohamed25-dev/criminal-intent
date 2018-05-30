@@ -20,8 +20,7 @@ import java.util.List;
 
 
 public class CrimeListFragment extends Fragment {
-    private static final int REQ_CRIME = 1;
-    private int mLastPressedPossition;
+    private int mLastPressedPosition;
     private RecyclerView mCrimeRecyclerView;
     private CrimeAdapter mCrimeAdapter;
 
@@ -51,7 +50,7 @@ public class CrimeListFragment extends Fragment {
             mCrimeAdapter = new CrimeAdapter(crimes);
             mCrimeRecyclerView.setAdapter(mCrimeAdapter);
         } else {
-            mCrimeAdapter.notifyItemChanged(mLastPressedPossition);
+            mCrimeAdapter.notifyItemChanged(mLastPressedPosition);
         }
 
     }
@@ -84,10 +83,9 @@ public class CrimeListFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
-            Intent intent = CrimeActivity.newIntent(getActivity(), mCrime.getId());
-            mLastPressedPossition = mCrimeAdapter.mCrimes.indexOf(mCrime);
-            Log.d("TAG", "updateUI: "+mLastPressedPossition);
-            startActivityForResult(intent, REQ_CRIME);
+            Intent intent = CrimePagerActivity.newIntent(getActivity(), mCrime.getId());
+            mLastPressedPosition = mCrimeAdapter.mCrimes.indexOf(mCrime);
+            startActivity(intent);
         }
     }
 
