@@ -7,4 +7,13 @@
     <string name="date_picker_title">Date of Crime :</string>
     <string name="first_button">first</string>
     <string name="last_button">last</string>
+    <string name="new_crime">New Crime</string>
+    <string name="show_subtitle">Show Subtitle</string>
+    <string name="hide_subtitle">Hide Subtitle</string>
+    <string name="subtitle_format">%1$d</string>
+    <string name="delete_crime">DELET CRIME</string>
+    <plurals name="subtitle_plurals">
+        <item quantity="one">%1$d crime</item>
+        <item quantity="other">%1$d crimes</item>
+    </plurals>
 </resources>

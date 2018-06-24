@@ -3,15 +3,18 @@ package com.example.mohamed.criminalintent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.List;
 import java.util.UUID;
@@ -39,6 +42,9 @@ public class CrimePagerActivity extends AppCompatActivity {
 
 
         mViewPager = findViewById(R.id.crime_view_pager);
+        mLastButton = findViewById(R.id.last_button);
+        mFirstButton = findViewById(R.id.first_button);
+
         mCrimes = CrimeLab.get(this).getCrimes();
 
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -57,32 +63,36 @@ public class CrimePagerActivity extends AppCompatActivity {
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
             }
 
             @Override
             public void onPageSelected(int position) {
 
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-                Log.d("", "getItem: "+mViewPager.getCurrentItem());
-                if (mViewPager.getCurrentItem() == 0) {
+                if (position == 0) {
                     mFirstButton.setEnabled(false);
                 } else {
                     mFirstButton.setEnabled(true);
                 }
+
+                if (position == mCrimes.size() - 1) {
+                    mLastButton.setEnabled(false);
+                    Toast.makeText(CrimePagerActivity.this, "Positoin #"+position, Toast.LENGTH_SHORT).show();
+                } else {
+                    mLastButton.setEnabled(true);
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
             }
         });
-
-        mLastButton = findViewById(R.id.last_button);
-        mFirstButton = findViewById(R.id.first_button);
 
         mLastButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mViewPager.setCurrentItem(mCrimes.size()-1);
+                mLastButton.setEnabled(false);
             }
         });
 
@@ -90,6 +100,7 @@ public class CrimePagerActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mViewPager.setCurrentItem(0);
+                mFirstButton.setEnabled(false);
             }
         });
 
